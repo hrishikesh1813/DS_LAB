@@ -1,0 +1,89 @@
+#include<stdio.h> 
+#include<stdlib.h>
+struct node	//initialising structure
+{
+  int val;
+  struct node*next;
+};
+struct node *head;	//pointer structure for the value
+
+void push()	//function to push the elements
+{
+  int val;
+  struct node*ptr=(struct node*)malloc(sizeof(struct node)); //allocating memmory for structure 
+  if(ptr==NULL)
+    printf("Not able to stack the element");
+  else
+  {
+    printf("Enter the value:"); scanf("%d",&val);
+    if(head==NULL)
+    {
+      ptr->val=val;	//pushing value
+      ptr->next=NULL;		//set next to NULL 
+      head=ptr;	//equation head to new structure
+    }
+    else
+    {
+      ptr->val=val;	//pushing value
+      ptr->next=head;		//set next to head 
+      head=ptr;	//equation head to new structure
+    }
+    printf("value pushed");
+  }
+}
+
+
+void pop()	//function to pop elements
+{
+  int item;
+  struct node *ptr; 
+  if(head==NULL)
+    printf("Stack empty");
+  else
+  {
+    item=head->val; ptr=head;
+    head=head->next;	//linking head to previous node's address free(ptr);	//poping elemnt
+    printf("Item poped");
+  }
+}
+
+void display()	//function to display all the elements
+{
+  int i;
+  struct node*ptr; ptr=head; 
+  if(ptr==NULL)
+    printf("stack empty");
+  else
+  {
+    printf("Displaying elements"); 
+    while(ptr!=NULL)
+    {
+        printf("\n %d",ptr->val);	//printing values ptr=ptr->next;
+     }
+  }
+
+}
+
+
+void main()
+{
+  int choice;
+  while(1)	//to get infinite loop till termination
+  {
+    printf("\n\n*****MAIN MENU****\n\n");
+    printf("Enter your choice:\n 1.push \n 2.pop \n 3.display \n 4.exit\n\n"); scanf("%d",&choice);	//taking choice input
+    switch(choice)	//to call corresponding function based on input
+    {
+      case 1:push();	//function call to push value 
+      break;
+      case 2:pop();	//function call to pop the value 
+      break;
+      case 3:display();	//function call to display the values in the stack 
+      break;
+      case 4:exit(0);	//program termination 
+      break;
+      default:printf("Enter a correct choice:\n"); 
+      break;
+    }
+  }
+}
